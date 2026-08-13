@@ -1,26 +1,28 @@
 # Kansai Haru 2026 — ESP32 Robot Controller
 
-ESP32-based robot control firmware for the KUAS Robotics Team Kansai Haru 2026 build. The main controller runs Arduino on ESP32 through PlatformIO, reads a PS4 controller over Bluetooth, drives RoboMaster/C620-style CAN ESCs with PID speed control, and controls the conveyor, lift, Yagura lift, servos, OLED status display, and an ESP-NOW flag signal.
+This is the code for the KUAS Robotics Team's 2026 robot. It runs on an ESP32 using PlatformIO. 
+
+The ESP32 connects to a PS4 controller over Bluetooth to drive the robot, read motor speeds, move the lift and conveyor mechanisms, show status info on a small screen, and send wireless signals to another ESP32.
 
 ---
 
-## Highlights
+## Features
 
-- Drive: 4-motor holonomic drive with per-wheel PID using RPM feedback from CAN IDs `0x201–0x204`.
-- Input: PS4 wireless controller over Bluetooth.
-- CAN: MCP2515 at 1 Mbps with an 8 MHz crystal.
-- Mechanisms: conveyor, lift, Yagura lift, and two servo outputs.
-- Display: SSD1306 128×64 I²C OLED at address `0x3C`.
-- Wireless link: ESP-NOW message for sending a simple open/close flag to another ESP32.
+* **4-Wheel Drive**: Controls a 4-wheel omni/mecanum drive system with speed feedback from the motors via CAN bus (`0x201–0x204`).
+* **PS4 Controller**: Wireless control over Bluetooth.
+* **CAN Bus**: Uses an MCP2515 module (1 Mbps, 8 MHz crystal) to talk to motor controllers.
+* **Mechanisms**: Controls the conveyor, lifts (main & Yagura), and two servos.
+* **OLED Screen**: Displays robot status on a small 128×64 screen (SSD1306, I²C).
+* **Wireless Signal**: Uses ESP-NOW to send a simple open/close command to a second ESP32.
 
 ---
 
-## Repo layout
+## Folder Structure
 
 ```text
 kiseki-main/
-├─ platformio.ini              # ESP32 PlatformIO config
-├─ partitions.csv              # custom ESP32 partition table
-├─ include/                    # subsystem headers and shared config
-├─ src/                        # implementations and main loop
-└─ test/                       # PlatformIO test scaffold
+├─ platformio.ini      # ESP32 project settings
+├─ partitions.csv      # ESP32 memory setup
+├─ include/            # Header files and settings
+├─ src/                # Main code files
+└─ test/               # Code testing folder
