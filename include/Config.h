@@ -7,7 +7,10 @@
 #define canCs 5             //CHIP SELECT FOR PURPLE PCB
 #define buzzerPin 15        //BUZZER PIN FOR PURPLE PCB
 #define MAX_SPEED 8000      //maximum is 16000, 
-#define LIFT_POWER 2000     // Lift Speed
+#define LIFT_POWER 7000     // Lift Speed
+
+const int SDA_PIN = 32;
+const int SCL_PIN = 33;
 
 const float kP = 0.5;  
 const float kI = 0.01; 
