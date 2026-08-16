@@ -27,10 +27,10 @@ void driveMecanum(int forward, int sideways, int turn, int maxCurrent) {
     float m8 = -forward - sideways + turn; // M8: Back Right
 
     // Map outputs to target motor currents
-    int16_t c5 = constrain(map(m5, -384, 384, -maxCurrent, maxCurrent), -maxCurrent, maxCurrent);
-    int16_t c6 = constrain(map(m6, -384, 384, -maxCurrent, maxCurrent), -maxCurrent, maxCurrent);
-    int16_t c7 = constrain(map(m7, -384, 384, -maxCurrent, maxCurrent), -maxCurrent, maxCurrent);
-    int16_t c8 = constrain(map(m8, -384, 384, -maxCurrent, maxCurrent), -maxCurrent, maxCurrent);
+    int16_t c5 = constrain(map(m5, -256, 256, -maxCurrent, maxCurrent), -maxCurrent, maxCurrent);
+    int16_t c6 = constrain(map(m6, -256, 256, -maxCurrent, maxCurrent), -maxCurrent, maxCurrent);
+    int16_t c7 = constrain(map(m7, -256, 256, -maxCurrent, maxCurrent), -maxCurrent, maxCurrent);
+    int16_t c8 = constrain(map(m8, -256, 256, -maxCurrent, maxCurrent), -maxCurrent, maxCurrent);
 
     // Build the 8-byte CAN payload for ESCs 5-8
     byte frame[8];
@@ -49,5 +49,5 @@ void driveMecanum(int forward, int sideways, int turn, int maxCurrent) {
     }
 
     // Sends command to Motor IDs 5-8
-    CAN_Driver.sendMsgBuf(0x204, 0, 8, frame);
+    CAN_Driver.sendMsgBuf(0x1FF, 0, 8, frame);
 }

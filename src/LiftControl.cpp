@@ -19,9 +19,9 @@ void driveMainLift(int upPressed, int downPressed, int liftPower) {
 
 void driveBackLift(int upPressed, int downPressed, int liftPower) {
     if (upPressed) {
-        targetCurrent2 = liftPower;     // Triangle button -> Up
+        targetCurrent2 = -liftPower;     // Triangle button -> Up
     } else if (downPressed) {
-        targetCurrent2 = -liftPower;    // Cross button -> Down
+        targetCurrent2 = liftPower;    // Cross button -> Down
     } else {
         targetCurrent2 = 0;             // Idle
     }
