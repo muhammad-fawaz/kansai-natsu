@@ -1,22 +1,8 @@
 #include "Config.h"
 #include "Display.h"
-#include "MotorControl.h"
+#include "DriveBase.h"
 
-// MCP2515 CAN Driver using CS pin defined in config.h
-MCP_CAN CAN_Driver(canCs);
-
-bool initCAN() {
-    if (CAN_Driver.begin(MCP_ANY, CAN_1000KBPS, MCP_8MHZ) == CAN_OK) {
-        CAN_Driver.setMode(MCP_NORMAL);
-        Serial.println("MCP2515 CAN Bus Initialized Successfully!");
-        return true;
-    } else {
-        Serial.println("Error Initializing MCP2515...");
-        showMessage("Failed to Initialize CAN Bus...");
-        delay(100);
-        return false;
-    }
-}
+extern MCP_CAN CAN_Driver1;
 
 void driveMecanum(int forward, int sideways, int turn, int maxCurrent) {
 
@@ -49,5 +35,5 @@ void driveMecanum(int forward, int sideways, int turn, int maxCurrent) {
     }
 
     // Sends command to Motor IDs 5-8
-    CAN_Driver.sendMsgBuf(0x1FF, 0, 8, frame);
+    CAN_Driver1.sendMsgBuf(0x1FF, 0, 8, frame);
 }

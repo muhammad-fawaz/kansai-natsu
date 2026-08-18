@@ -1,7 +1,7 @@
 #include "Config.h"
 #include "MotorRPMReader.h"
 
-extern MCP_CAN CAN_Driver;
+extern MCP_CAN CAN_Driver1;
 
 MotorRPM motorRPMData = {0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -10,8 +10,8 @@ void updateMotorRPM() {
     unsigned char len = 0;
     unsigned char rxBuf[8];
 
-    if (!digitalRead(canInt)) {
-        CAN_Driver.readMsgBuf(&rxId, &len, rxBuf);
+    if (!digitalRead(can1_Int)) {
+        CAN_Driver1.readMsgBuf(&rxId, &len, rxBuf);
 
         short rpm = (rxBuf[2] << 8) | rxBuf[3];
 

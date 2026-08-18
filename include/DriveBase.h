@@ -1,10 +1,9 @@
-#ifndef MOTOR_CONTROL_H
-#define MOTOR_CONTROL_H
+#ifndef DRIVE_BASE_H
+#define DRIVE_BASE_H
 
 #include <mcp_can.h>
 #include <SPI.h>
 
-bool initCAN();
 void driveMecanum(int forward, int sideways, int turn, int maxCurrent);
 
 #endif

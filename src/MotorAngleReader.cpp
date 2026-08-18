@@ -1,7 +1,7 @@
 #include "Config.h"
 #include "MotorAngleReader.h"
 
-extern MCP_CAN CAN_Driver;
+extern MCP_CAN CAN_Driver1;
 
 MotorAngle motorAngleData = {0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -10,8 +10,8 @@ void updateMotorAngle() {
     unsigned char len = 0;
     unsigned char rxBuf[8];
 
-    if (!digitalRead(canInt)) {
-        CAN_Driver.readMsgBuf(&rxId, &len, rxBuf);
+    if (!digitalRead(can1_Int)) {
+        CAN_Driver1.readMsgBuf(&rxId, &len, rxBuf);
 
         short angle = (rxBuf[0] << 8) | rxBuf[1];
 

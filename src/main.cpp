@@ -1,7 +1,8 @@
 #include "Config.h"
 #include "Display.h"
+#include "DriveBase.h"
 #include "LiftControl.h"
-#include "MotorControl.h"
+#include "InitializeCAN.h"
 #include "MotorRPMReader.h"
 #include "BluetoothUtils.h"
 #include "PS4ControllerHandler.h"
@@ -10,18 +11,20 @@ void setup() {
     Serial.begin(115200);
     
     // Set CAN interrupt pin mode
-    pinMode(canInt, INPUT_PULLUP);
+    pinMode(can1_Int, INPUT_PULLUP);
+    pinMode(can2_Int, INPUT_PULLUP);
 
     // Initialize the Oled
     initDisplay();
     showMessage("Initializing Display...");
 
     // Initialize CAN bus and PS4 Controller
-    initCAN();  
     showMessage("Initializing CAN Bus...");
+    initCAN1();
+    initCAN2();
 
-    PS4.begin();
     showMessage("Initializing Controller...");
+    PS4.begin();
 
     // Print MAC Address to terminal
     Serial.print("ESP32 Bluetooth MAC Address: ");

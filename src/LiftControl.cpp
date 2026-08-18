@@ -2,7 +2,7 @@
 #include "Display.h"
 #include "LiftControl.h"
 
-extern MCP_CAN CAN_Driver;
+extern MCP_CAN CAN_Driver1;
 
 int16_t targetCurrent1 = 0;
 int16_t targetCurrent2 = 0;
@@ -47,7 +47,7 @@ void sendLiftFrame() {
     frame[7] = 0;
 
     // Send frame to ID 0x200 (Controls ESCs 1-4)
-    CAN_Driver.sendMsgBuf(0x200, 0, 8, frame);
+    CAN_Driver1.sendMsgBuf(0x200, 0, 8, frame);
     if (targetCurrent1 != 0 || targetCurrent2 != 0) {
         showMessage("Lift Moving");
         Serial.printf("Front Lift: %d | Back Lift: %d\n", targetCurrent1, targetCurrent2);
